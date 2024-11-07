@@ -5,35 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jogo do Pega-Pega</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="game-container">
         <!-- Título do Jogo -->
-        <h1 class="game-title">Jogo do Pega-Pega</h1>
+        <h1 class="game-title">Colete as vidas<i class="fa-regular fa-heart" style="color: #ffffff;"></i>...... ou pelo menos tente, hahahaha!</h1>
 
         <!-- Exibição de Pontuação e Tempo -->
         <div class="scoreboard">
-            <p id="score">Pontos: 0</p>
-            <p id="timer">Tempo: 30s</p>
+            <p id="score">Vidas  <i class="fa-regular fa-heart" style="color: #ffffff;"></i>: 1</p>
+            <p id="timer">Tempo: 5s</p>
         </div>
 
         <!-- Ponto a ser clicado -->
-        <div id="dot" class="dot hidden"></div>
+        <div id="dot" class="dot hidden">
+          <i id="hearth"class="fa-regular fa-heart" style="color: #ffffff;"></i>
+        </div>
+        
 
         <!-- Tela de Fim de Jogo -->
         <div id="gameOver" class="game-over hidden">
             <h2>Fim de Jogo!</h2>
             <p>Pontuação Final: <span id="finalScore">0</span></p>
-            <button id="restartBtn">Reiniciar</button>
+            <button id="restartBtn">Você morreu ...EU AVISEI! mas ..por que não tentar novamente?</button>
         </div>
 
         <!-- Botão de Iniciar -->
-        <button id="startBtn" class="start-btn">Começar</button>
+        <button id="startBtn" class="start-btn">Você não durará muito ...mas é você quem sabe, CRIANÇA!! </button>
     </div>
 
     <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
