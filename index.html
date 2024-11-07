@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo do Pega-Pega</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Título do Jogo -->
+        <h1 class="game-title">Jogo do Pega-Pega</h1>
+
+        <!-- Exibição de Pontuação e Tempo -->
+        <div class="scoreboard">
+            <p id="score">Pontos: 0</p>
+            <p id="timer">Tempo: 30s</p>
+        </div>
+
+        <!-- Ponto a ser clicado -->
+        <div id="dot" class="dot hidden"></div>
+
+        <!-- Tela de Fim de Jogo -->
+        <div id="gameOver" class="game-over hidden">
+            <h2>Fim de Jogo!</h2>
+            <p>Pontuação Final: <span id="finalScore">0</span></p>
+            <button id="restartBtn">Reiniciar</button>
+        </div>
+
+        <!-- Botão de Iniciar -->
+        <button id="startBtn" class="start-btn">Começar</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
