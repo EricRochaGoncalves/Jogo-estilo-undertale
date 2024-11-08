@@ -6,11 +6,17 @@
     <title>Jogo do Pega-Pega</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="game-container">
         <!-- Título do Jogo -->
-        <h1 class="game-title">Colete as vidas<i class="fa-regular fa-heart" style="color: #ffffff;"></i>...... ou pelo menos tente, hahahaha!</h1>
+        <h1 class="game-title">Jogo criado por <a href="">Eric G<i class="fa-brands fa-github" style="color: rgba (0, 255,0);"></i>nçalves</a></h1>
+        <h1 class="game-title"><i class="fa-solid fa-skull" style="color: #ffffff;"></i>: Colete as vidas ... ou ao menos tente, se for capaz. Hahahaha!
+
+</h1>
 
         <!-- Exibição de Pontuação e Tempo -->
         <div class="scoreboard">
@@ -20,7 +26,7 @@
 
         <!-- Ponto a ser clicado -->
         <div id="dot" class="dot hidden">
-          <i id="hearth"class="fa-regular fa-heart" style="color: #ffffff;"></i>
+          <i class="fa-solid fa-heart fa-lg" style="color: #ffffff;"></i>
         </div>
         
 
@@ -28,11 +34,15 @@
         <div id="gameOver" class="game-over hidden">
             <h2>Fim de Jogo!</h2>
             <p>Pontuação Final: <span id="finalScore">0</span></p>
-            <button id="restartBtn">Você morreu ...EU AVISEI! mas ..por que não tentar novamente?</button>
+            <button id="restartBtn"> <i class="fa-solid fa-skull" style="color: #ffffff;"></i>:Você falhou... como eu previ. Mas, por que não tentar novamente? Embora, da próxima vez, talvez não haja uma chance."
+
+</button>
         </div>
 
         <!-- Botão de Iniciar -->
-        <button id="startBtn" class="start-btn">Você não durará muito ...mas é você quem sabe, CRIANÇA!! </button>
+        <button id="startBtn" class="start-btn"><i class="fa-solid fa-skull" style="color: #ffffff;"></i>   :Tão confiante... mas sua jornada será breve. Vá em frente, se ousa – criança."
+
+</button>
     </div>
 
     <script src="script.js"></script>
