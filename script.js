@@ -1,5 +1,5 @@
 let score = 1;                // Pontuação
-let timeLeft = 5;             // Tempo inicial
+let timeLeft = 8;             // Tempo inicial
 let timer;                    // Variável para o temporizador
 let dot;                      // O ponto a ser clicado
 let startBtn;                 // O botão de "Começar"
@@ -11,7 +11,7 @@ let moveInterval;             // Variável para controlar a frequência de movim
 // Função para iniciar o jogo
 function startGame() {
     score = 0;
-    timeLeft = 5;
+    timeLeft = 8;
     moveSpeed = 1000; // Reseta a velocidade inicial de movimento
     document.getElementById('score').textContent = `Vidas ♡: ${score}`;
     document.getElementById('timer').textContent = `Tempo: ${timeLeft}s`;
@@ -50,8 +50,8 @@ function hitDot() {
         increaseDifficulty();
     }
     
-    if (timeLeft < 5) timeLeft += 5;  
-    if (timeLeft > 5) timeLeft = 5;  
+    if (timeLeft < 8) timeLeft += 8;  
+    if (timeLeft > 8) timeLeft = 8;  
     document.getElementById('timer').textContent = `Tempo: ${timeLeft}s`;
     moveDot(); // Move o ponto para uma nova posição aleatória
 }
@@ -66,7 +66,7 @@ function increaseDifficulty() {
 // Função para mover o ponto
 function moveDot() {
     const maxX = 500; // Aumenta o máximo X dentro da área para aumentar o deslocamento
-    const maxY = 900; // Aumenta o máximo Y dentro da área para aumentar o deslocamento
+    const maxY = 825; // Aumenta o máximo Y dentro da área para aumentar o deslocamento
     const randomX = Math.floor(Math.random() * maxX);
     const randomY = Math.floor(Math.random() * maxY);
     
