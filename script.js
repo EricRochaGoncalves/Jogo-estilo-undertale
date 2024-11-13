@@ -65,8 +65,8 @@ function increaseDifficulty() {
 
 // Função para mover o ponto
 function moveDot() {
-    const maxX = 500; // Aumenta o máximo X dentro da área para aumentar o deslocamento
-    const maxY = 825; // Aumenta o máximo Y dentro da área para aumentar o deslocamento
+    const maxX = 700; // Aumenta o máximo X dentro da área para aumentar o deslocamento
+    const maxY = 525; // Aumenta o máximo Y dentro da área para aumentar o deslocamento
     const randomX = Math.floor(Math.random() * maxX);
     const randomY = Math.floor(Math.random() * maxY);
     
