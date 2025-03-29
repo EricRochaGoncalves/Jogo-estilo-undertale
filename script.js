@@ -1,106 +1,144 @@
-let score = 1;                // Pontuação
-let timeLeft = 8;             // Tempo inicial
-let timer;                    // Variável para o temporizador
-let dot;                      // O ponto a ser clicado
-let startBtn;                 // O botão de "Começar"
-let gameOverScreen;           // Tela de fim de jogo
-let restartBtn;               // Botão de reiniciar
-let moveSpeed = 1000;         // Velocidade inicial de movimentação do ponto (em ms)
-let moveInterval;             // Variável para controlar a frequência de movimentação do ponto
+let score = 1;
+let timeLeft = 8.0;
+let bossHealth = 50;
+let maxBossHealth = 50;
+let timer, dot, startBtn, gameOverScreen, restartBtn, moveSpeed = 1000, moveInterval;
 
-// Função para iniciar o jogo
+// Função de animação de digitação
+function typeText(element, text, speed = 50) {
+    element.innerHTML = ''; // Limpa o conteúdo
+    let i = 0;
+    const interval = setInterval(() => {
+        if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            i++;
+        } else {
+            clearInterval(interval);
+        }
+    }, speed);
+}
+
 function startGame() {
     score = 0;
-    timeLeft = 8;
-    moveSpeed = 1000; // Reseta a velocidade inicial de movimento
+    timeLeft = 8.0;
+    bossHealth = maxBossHealth;
+    moveSpeed = 1000;
     document.getElementById('score').textContent = `Vidas ♡: ${score}`;
-    document.getElementById('timer').textContent = `Tempo: ${timeLeft}s`;
+    document.getElementById('timer').textContent = `Tempo: ${timeLeft.toFixed(1)}s`;
+    document.getElementById('timeFill').style.width = '100%';
+    document.getElementById('bossHealthText').textContent = `Vida do Chefe: ${bossHealth}`;
+    document.getElementById('bossHealthFill').style.width = '100%';
 
-    startBtn.style.display = 'none'; // Esconde o botão de começar
-    dot.classList.remove('hidden'); // Torna o ponto visível
-    gameOverScreen.classList.remove('visible'); // Esconde a tela de fim de jogo
-    dot.addEventListener('click', hitDot); // Adiciona o evento de clique no ponto
-    startTimer(); // Inicia o contador de tempo
-    startMovingDot(); // Inicia a movimentação periódica do ponto
+    // Animação dos títulos iniciais
+    
+    typeText(document.getElementById('gameTitle2'), 'Me derrote, ao menos tente, se for capaz. Hahahaha!');
+
+    startBtn.style.display = 'none';
+    dot.classList.remove('hidden');
+    gameOverScreen.classList.remove('visible');
+    dot.addEventListener('click', hitDot);
+    startTimer();
+    startMovingDot();
 }
 
-// Função para iniciar o cronômetro
 function startTimer() {
     timer = setInterval(function() {
-        timeLeft--;
-        document.getElementById('timer').textContent = `Tempo: ${timeLeft}s`;
-        
-        if (timeLeft <= 0) {
-            endGame();
-        }
-    }, 1000);
+        timeLeft -= 0.1;
+        document.getElementById('timer').textContent = `Tempo: ${timeLeft.toFixed(1)}s`;
+        document.getElementById('timeFill').style.width = `${(timeLeft / 8) * 100}%`;
+        if (timeLeft <= 0) endGame(false);
+    }, 100);
 }
 
-// Função para iniciar a movimentação periódica do ponto
 function startMovingDot() {
     moveInterval = setInterval(moveDot, moveSpeed);
 }
 
-// Função para quando o ponto for clicado
 function hitDot() {
     score++;
+    bossHealth -= 5; // Chefe perde 5 pontos de vida por clique
     document.getElementById('score').textContent = `Vidas ♡: ${score}`;
+    document.getElementById('bossHealthText').textContent = `Vida do Chefe: ${bossHealth}`;
+    document.getElementById('bossHealthFill').style.width = `${(bossHealth / maxBossHealth) * 100}%`;
     
-    if (score % 10 === 0) {
-        increaseDifficulty();
+    dot.classList.add('clicked');
+    setTimeout(() => {
+        dot.classList.remove('clicked');
+        moveDot();
+    }, 100);
+
+    // Mudança de texto na metade da vida
+    if (bossHealth <= maxBossHealth / 2 && bossHealth > 0) {
+        typeText(document.getElementById('gameTitle2'), 'Você nunca irá me vencer!');
     }
-    
-    if (timeLeft < 8) timeLeft += 8;  
-    if (timeLeft > 8) timeLeft = 8;  
-    document.getElementById('timer').textContent = `Tempo: ${timeLeft}s`;
-    moveDot(); // Move o ponto para uma nova posição aleatória
+
+    if (bossHealth <= 0) {
+        endGame(true);
+    } else {
+        if (score % 10 === 0) increaseDifficulty();
+        if (timeLeft < 8) timeLeft += 8;
+        if (timeLeft > 8) timeLeft = 8;
+    }
 }
 
-// Função para aumentar a dificuldade ao atingir múltiplos de 10 pontos
 function increaseDifficulty() {
-    moveSpeed = Math.max(300, moveSpeed - 100); // Reduz a velocidade até um mínimo de 200ms
+    moveSpeed = Math.max(300, moveSpeed - 100);
     clearInterval(moveInterval);
     startMovingDot();
 }
 
-// Função para mover o ponto
 function moveDot() {
-    const maxX = 700; // Aumenta o máximo X dentro da área para aumentar o deslocamento
-    const maxY = 525; // Aumenta o máximo Y dentro da área para aumentar o deslocamento
+    const container = document.querySelector('.game-container');
+    const dotSize = dot.offsetWidth;
+    const maxX = container.clientWidth - dotSize;
+    const minY = 250;
+    const maxY = container.clientHeight - dotSize;
     const randomX = Math.floor(Math.random() * maxX);
-    const randomY = Math.floor(Math.random() * maxY);
-    
+    const randomY = Math.floor(Math.random() * (maxY - minY)) + minY;
     dot.style.left = randomX + 'px';
     dot.style.top = randomY + 'px';
 }
 
-// Função para encerrar o jogo
-function endGame() {
+function endGame(victory) {
     clearInterval(timer);
     clearInterval(moveInterval);
     dot.classList.add('hidden');
     gameOverScreen.classList.add('visible');
     document.getElementById('finalScore').textContent = score;
+    if (victory) {
+        typeText(document.getElementById('gameOverTitle'), "Vitória!");
+        document.getElementById('restartBtn').textContent = "Jogar Novamente?";
+    } else {
+        typeText(document.getElementById('gameOverTitle'), "Fim de Jogo!");
+        document.getElementById('restartBtn').textContent = "";
+        typeText(document.getElementById('restartBtn'), 'Você falhou... como eu previ. Tentar novamente?');
+    }
 }
 
-// Função para reiniciar o jogo
 function restartGame() {
     score = 0;
-    timeLeft = 5;
+    timeLeft = 8.0;
+    bossHealth = maxBossHealth;
     moveSpeed = 1000;
     document.getElementById('score').textContent = `Vidas ♡: ${score}`;
-    document.getElementById('timer').textContent = `Tempo: ${timeLeft}s`;
+    document.getElementById('timer').textContent = `Tempo: ${timeLeft.toFixed(1)}s`;
+    document.getElementById('bossHealthText').textContent = `Vida do Chefe: ${bossHealth}`;
+    document.getElementById('timeFill').style.width = '100%';
+    document.getElementById('bossHealthFill').style.width = '100%';
     startBtn.style.display = 'inline-block';
     gameOverScreen.classList.remove('visible');
+    typeText(document.getElementById('gameTitle2'), 'Colete as vidas ... ou ao menos tente, se for capaz. Hahahaha!');
 }
 
-// Funções de controle do botão
 window.onload = function() {
     dot = document.getElementById('dot');
     startBtn = document.getElementById('startBtn');
     gameOverScreen = document.getElementById('gameOver');
     restartBtn = document.getElementById('restartBtn');
+    startBtn.addEventListener('click', startGame);
+    restartBtn.addEventListener('click', restartGame);
+
+    // Animação inicial dos títulos
     
-    startBtn.addEventListener('click', startGame);  // Começar o jogo
-    restartBtn.addEventListener('click', restartGame); // Reiniciar o jogo
+    typeText(document.getElementById('gameTitle2'), ' Me derrote, ao menos tente, se for capaz. Hahahaha!');
 };
