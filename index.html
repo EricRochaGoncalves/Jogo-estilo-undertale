@@ -8,46 +8,40 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="./img/skull-solid.svg" type="image/x-icon">
 </head>
 <body>
     <div class="game-container">
         <!-- Título do Jogo -->
-        <h1 class="game-title">Jogo criado por <a href="https://portif-lio-ericgoncalves.onrender.com">Eric G<i class="fa-brands fa-github" style="color: rgba (0, 255,0);"></i>nçalves</a></h1>
-        <h1 class="game-title"><i class="fa-solid fa-skull" style="color: #ffffff;"></i>: Colete as vidas ... ou ao menos tente, se for capaz. Hahahaha!
+        <h1 id="gameTitle1" class="game-title">Jogo criado por <a href="https://portif-lio-ericgoncalves.onrender.com">Eric G<i class="fa-brands fa-github" style="color: rgba(0, 255,0);"></i>nçalves</a></h1>
+        <h1 id="gameTitle2" class="game-title"> Me derrote <br> ou ao menos tente, se for capaz. Hahahaha!</h1>
 
-</h1>
-
-        <!-- Exibição de Pontuação e Tempo -->
+        <!-- Exibição de Pontuação, Tempo e Vida do Chefe -->
         <div class="scoreboard">
-            <p id="score">Vidas  <i class="fa-regular fa-heart" style="color: #ffffff;"></i>: 1</p>
-            <p id="timer">Tempo: 5s</p>
+            <p id="score">Vidas <i class="fa-regular fa-heart" style="color: #ffffff;"></i>: 1</p>
+            <p id="timer">Tempo: 8s</p>
         </div>
+        <div class="timer-bar"><div id="timeFill"></div></div>
+        <div class="boss-health-bar"><div id="bossHealthFill"></div></div>
+        <p id="bossHealthText">Vida do Chefe: 50</p>
 
         <!-- Ponto a ser clicado -->
         <div id="dot" class="dot hidden">
-          <i class="fa-solid fa-heart fa-lg" style="color: #ffffff;"></i>
+            <i class="fa-solid fa-heart fa-lg" style="color: #ffffff;"></i>
         </div>
-        
 
         <!-- Tela de Fim de Jogo -->
         <div id="gameOver" class="game-over hidden">
-            <h2>Fim de Jogo!</h2>
+            <h2 id="gameOverTitle">Fim de Jogo!</h2>
             <p>Pontuação Final: <span id="finalScore">0</span></p>
-            <button id="restartBtn"> <i class="fa-solid fa-skull" style="color: #ffffff;"></i>:Você falhou... como eu previ. Mas, por que não tentar novamente? Embora, da próxima vez, talvez não haja uma chance."
-
-</button>
+            <button id="restartBtn"><i class="fa-solid fa-skull" style="color: #ffffff;"></i>: Você falhou... como eu previ. Mas, por que não tentar novamente? Embora, da próxima vez, talvez não haja uma chance.</button>
         </div>
 
         <!-- Botão de Iniciar -->
-        <button id="startBtn" class="start-btn"><i class="fa-solid fa-skull" style="color: #ffffff;"></i>   :Tão confiante... mas sua jornada será breve. Vá em frente, se ousa – criança."
-
-</button>
+        <button id="startBtn" class="start-btn"><i class="fa-solid fa-skull" style="color: #ffffff; font-size: 25px;"></i> : Tão confiante... <br> mas sua jornada será breve. <br> Vá em frente, se ousa – criança. <br> [ START ]</button>
     </div>
 
     <script src="script.js"></script>
 </body>
 </html>
-
-
-
